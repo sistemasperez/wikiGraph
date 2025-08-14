@@ -1,0 +1,32 @@
+[
+  {
+    "id": "9775e101-f08b-429f-8ce4-060b08800558",
+    "name": "Mi Exploracion de Prueba",
+    "nodes": [],
+    "edges": []
+  },
+  {
+    "id": "9de61680-37ee-47ba-a162-48d7ad784a64",
+    "name": "Mi Exploracion de Prueba",
+    "nodes": [
+      {
+        "id": "NodoA",
+        "label": "Primer Nodo",
+        "summary": "Este es el resumen del nodo A.",
+        "degree_centrality": 0.6
+      },
+      {
+        "id": "NodoB",
+        "label": "Segundo Nodo",
+        "summary": "Este es el resumen del nodo B.",
+        "degree_centrality": 0.4
+      }
+    ],
+    "edges": [
+      {
+        "from": "NodoA",
+        "to": "NodoB"
+      }
+    ]
+  }
+]

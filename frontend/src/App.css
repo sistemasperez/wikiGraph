@@ -1,0 +1,816 @@
+:root {
+  font-family: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #2c3e50; /* Darker text for elegance */
+  background-color: #f8f9fa; /* Light background */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1200px; /* Slightly wider */
+  margin: 0 auto;
+  padding: 2.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.8em;
+  line-height: 1.1;
+  color: #34495e; /* Deeper blue-gray for headings */
+  margin-bottom: 2rem;
+  letter-spacing: -0.03em;
+}
+
+/* Tabs Styling */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #e0e0e0; /* Lighter, more subtle border */
+  width: 100%;
+  max-width: 600px;
+}
+
+:root {
+  font-family: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #2c3e50; /* Darker text for elegance */
+  background-color: #f8f9fa; /* Light background */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1200px; /* Slightly wider */
+  margin: 0 auto;
+  padding: 2.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.8em;
+  line-height: 1.1;
+  color: #34495e; /* Deeper blue-gray for headings */
+  margin-bottom: 2rem;
+  letter-spacing: -0.03em;
+}
+
+/* Tabs Styling */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #e0e0e0; /* Lighter, more subtle border */
+  width: 100%;
+  max-width: 600px;
+}
+
+.tabs button {
+  padding: 12px 25px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #7f8c8d; /* Muted gray for inactive tabs */
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tabs button:hover {
+  color: #3498db; /* Brighter blue on hover */
+  border-bottom-color: #bdc3c7; /* Subtle hover underline */
+}
+
+.tabs button.active {
+  color: #3498db; /* Active tab blue */
+  border-bottom-color: #3498db; /* Active tab underline */
+  font-weight: 600;
+}
+
+/* General Section Styling */
+.search-section,
+.search-results,
+.graph-display,
+.my-explorations {
+  background-color: #ffffff; /* White background for sections */
+  border-radius: 10px; /* More rounded corners */
+  padding: 2rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+  text-align: left;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Search Section */
+.search-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.search-section input {
+  padding: 12px 15px;
+  width: 350px;
+  border: 1px solid #dcdcdc; /* Lighter border */
+  border-radius: 8px;
+  font-size: 1em;
+  color: #34495e;
+}
+
+.search-section button {
+  padding: 12px 25px;
+  background-color: #3498db; /* Primary blue button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-section button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.search-section button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Message */
+.error-message {
+  color: #e74c3c; /* Red for errors */
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Search Results */
+.search-results h2 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin-bottom: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0; /* Very light border */
+  transition: background-color 0.2s ease;
+}
+
+.search-results li:hover {
+  background-color: #fdfdfd;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
+}
+
+.search-results li a {
+  color: #3498db; /* Link blue */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.search-results li a:hover {
+  text-decoration: underline;
+}
+
+.search-results li p {
+  font-size: 0.95em;
+  color: #7f8c8d;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* Graph Display */
+.graph-display h2 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+}
+
+.graph-display h3 {
+  color: #555;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.4em;
+}
+
+.graph-display .graph-content {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.graph-display .nodes-list,
+.graph-display .edges-list {
+  flex: 1;
+  min-width: 280px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.graph-display .node-details {
+  flex: 2;
+  min-width: 350px;
+  background-color: #ecf0f1; /* Lighter gray for details */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.graph-display .node-details h3 {
+  margin-top: 0;
+  color: #3498db;
+  font-size: 1.6em;
+}
+
+.graph-display .node-details p {
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
+}
+
+.graph-display .node-details button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #2ecc71; /* Green for expand */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.graph-display .node-details button:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.graph-display li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.graph-display li:hover {
+  background-color: #fdfdfd;
+}
+
+.graph-display li.selected {
+  background-color: #e8f6f8; /* Lighter blue for selected */
+  border-left: 5px solid #3498db; /* Blue border */
+  font-weight: 600;
+}
+
+.graph-display li strong {
+  color: #3498db;
+}
+
+.graph-display li p {
+  font-size: 0.85em;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+/* My Explorations */
+.my-explorations h2 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+}
+
+.my-explorations .save-exploration-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.my-explorations .save-exploration-section input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #34495e;
+}
+
+.my-explorations .save-exploration-section button {
+  padding: 12px 25px;
+  background-color: #95a5a6; /* Muted gray for save */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.my-explorations .save-exploration-section button:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.my-explorations ul {
+  list-style: none;
+  padding: 0;
+}
+
+.my-explorations li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.my-explorations li:hover {
+  transform: translateY(-3px);
+}
+
+.my-explorations li span {
+  flex: 1;
+  font-weight: 600;
+  color: #34495e;
+  font-size: 1.05em;
+}
+
+.my-explorations li button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.my-explorations li button:first-of-type {
+  background-color: #3498db; /* Load button blue */
+  color: white;
+}
+
+.my-explorations li button:first-of-type:hover {
+  background-color: #2980b9;
+}
+
+.my-explorations li button:last-of-type {
+  background-color: #e74c3c; /* Delete button red */
+  color: white;
+}
+
+.my-explorations li button:last-of-type:hover {
+  background-color: #c0392b;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #e0e0e0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.tabs button {
+  padding: 12px 25px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #7f8c8d;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tabs button:hover {
+  color: #3498db;
+  border-bottom-color: #bdc3c7;
+}
+
+.tabs button.active {
+  color: #3498db;
+  border-bottom-color: #3498db;
+  font-weight: 600;
+}
+
+/* Styles for Reagraph container */
+.visual-graph-container {
+  flex-grow: 1; /* Allow it to grow and take available space */
+  min-height: 500px; /* Minimum height, but can expand */
+  width: 100%;
+  margin-top: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden; /* Hide overflow if graph goes beyond bounds */
+}
+
+.visual-graph-canvas {
+  height: 100%;
+  width: 100%;
+}
+
+
+.tabs button:hover {
+  color: #3498db; /* Brighter blue on hover */
+  border-bottom-color: #bdc3c7; /* Subtle hover underline */
+}
+
+.tabs button.active {
+  color: #3498db; /* Active tab blue */
+  border-bottom-color: #3498db; /* Active tab underline */
+  font-weight: 600;
+}
+
+/* General Section Styling */
+.search-section,
+.search-results,
+.graph-display,
+.my-explorations {
+  background-color: #ffffff; /* White background for sections */
+  border-radius: 10px; /* More rounded corners */
+  padding: 2rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+  text-align: left;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Search Section */
+.search-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.search-section input {
+  padding: 12px 15px;
+  width: 350px;
+  border: 1px solid #dcdcdc; /* Lighter border */
+  border-radius: 8px;
+  font-size: 1em;
+  color: #34495e;
+}
+
+.search-section button {
+  padding: 12px 25px;
+  background-color: #3498db; /* Primary blue button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-section button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.search-section button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Message */
+.error-message {
+  color: #e74c3c; /* Red for errors */
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Search Results */
+.search-results h2 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin-bottom: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0; /* Very light border */
+  transition: background-color 0.2s ease;
+}
+
+.search-results li:hover {
+  background-color: #fdfdfd;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
+}
+
+.search-results li a {
+  color: #3498db; /* Link blue */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.search-results li a:hover {
+  text-decoration: underline;
+}
+
+.search-results li p {
+  font-size: 0.95em;
+  color: #7f8c8d;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* Graph Display */
+.graph-display h2 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+}
+
+.graph-display h3 {
+  color: #555;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.4em;
+}
+
+.graph-display .graph-content {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.graph-display .nodes-list,
+.graph-display .edges-list {
+  flex: 1;
+  min-width: 280px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.graph-display .node-details {
+  flex: 2;
+  min-width: 350px;
+  background-color: #ecf0f1; /* Lighter gray for details */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.graph-display .node-details h3 {
+  margin-top: 0;
+  color: #3498db;
+  font-size: 1.6em;
+}
+
+.graph-display .node-details p {
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
+}
+
+.graph-display .node-details button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #2ecc71; /* Green for expand */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.graph-display .node-details button:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.graph-display li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.graph-display li:hover {
+  background-color: #fdfdfd;
+}
+
+.graph-display li.selected {
+  background-color: #e8f6f8; /* Lighter blue for selected */
+  border-left: 5px solid #3498db; /* Blue border */
+  font-weight: 600;
+}
+
+.graph-display li strong {
+  color: #3498db;
+}
+
+.graph-display li p {
+  font-size: 0.85em;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+/* My Explorations */
+.my-explorations h2 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+}
+
+.my-explorations .save-exploration-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.my-explorations .save-exploration-section input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #34495e;
+}
+
+.my-explorations .save-exploration-section button {
+  padding: 12px 25px;
+  background-color: #95a5a6; /* Muted gray for save */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.my-explorations .save-exploration-section button:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.my-explorations ul {
+  list-style: none;
+  padding: 0;
+}
+
+.my-explorations li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.my-explorations li:hover {
+  transform: translateY(-3px);
+}
+
+.my-explorations li span {
+  flex: 1;
+  font-weight: 600;
+  color: #34495e;
+  font-size: 1.05em;
+}
+
+.my-explorations li button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.my-explorations li button:first-of-type {
+  background-color: #3498db; /* Load button blue */
+  color: white;
+}
+
+.my-explorations li button:first-of-type:hover {
+  background-color: #2980b9;
+}
+
+.my-explorations li button:last-of-type {
+  background-color: #e74c3c; /* Delete button red */
+  color: white;
+}
+
+.my-explorations li button:last-of-type:hover {
+  background-color: #c0392b;
+}
