@@ -1,35 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
-interface Node {
-  id: string;
-  label: string;
-  summary?: string;
-  degree_centrality?: number;
-}
-
-interface Edge {
-  from: string;
-  to: string;
-}
-
-interface GraphData {
-  nodes: Node[];
-  edges: Edge[];
-}
-
-interface Exploration {
-  id: string;
-  name: string;
-  nodes: Node[];
-  edges: Edge[];
-}
+import { getExplorations, saveExploration, deleteExploration } from '../services/api';
+import type { Exploration, GraphData, Node, Edge } from '../services/api';
 
 interface MyExplorationsProps {
   onLoadExploration: (exploration: { name: string; nodes: Node[]; edges: Edge[] }) => void;
   currentGraph: GraphData | null;
 }
-
-const API_BASE_URL = 'http://127.0.0.1:8000'; // Assuming backend runs on this URL
 
 const MyExplorations: React.FC<MyExplorationsProps> = ({ onLoadExploration, currentGraph }) => {
   const [explorations, setExplorations] = useState<Exploration[]>([]);
@@ -41,11 +17,7 @@ const MyExplorations: React.FC<MyExplorationsProps> = ({ onLoadExploration, curr
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/explorations`);
-      if (!response.ok) {
-        throw new Error(`Error HTTP! estado: ${response.status}`);
-      }
-      const data: Exploration[] = await response.json();
+      const data = await getExplorations();
       setExplorations(data);
     } catch (e: any) {
       setError(`Fallo al obtener exploraciones: ${e.message}`);
@@ -56,6 +28,18 @@ const MyExplorations: React.FC<MyExplorationsProps> = ({ onLoadExploration, curr
 
   useEffect(() => {
     fetchExplorations();
+  }, []);
+
+  useEffect(() => {
+    const handleFocus = () => {
+      fetchExplorations();
+    };
+
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
   }, []);
 
   const handleSaveExploration = async () => {
@@ -70,16 +54,7 @@ const MyExplorations: React.FC<MyExplorationsProps> = ({ onLoadExploration, curr
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/explorations`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: saveName, nodes: currentGraph.nodes, edges: currentGraph.edges }),
-      });
-      if (!response.ok) {
-        throw new Error(`Error HTTP! estado: ${response.status}`);
-      }
+      await saveExploration(saveName, currentGraph);
       setSaveName(''); // Limpiar input
       await fetchExplorations(); // Refrescar lista
     } catch (e: any) {
@@ -94,12 +69,7 @@ const MyExplorations: React.FC<MyExplorationsProps> = ({ onLoadExploration, curr
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`${API_BASE_URL}/api/explorations/${id}`, {
-          method: 'DELETE',
-        });
-        if (!response.ok) {
-          throw new Error(`Error HTTP! estado: ${response.status}`);
-        }
+        await deleteExploration(id);
         await fetchExplorations(); // Refrescar lista
       } catch (e: any) {
         setError(`Fallo al eliminar exploración: ${e.message}`);
