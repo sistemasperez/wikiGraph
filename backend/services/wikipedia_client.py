@@ -2,10 +2,15 @@ from fastapi import HTTPException
 import requests
 from bs4 import BeautifulSoup
 import re
+import time # Added for caching
 
 WIKIPEDIA_API_URL = "https://en.wikipedia.org/w/api.php"
 
 class WikipediaClient:
+    def __init__(self):
+        self.cache = {} # Added cache dictionary
+        self.cache_ttl = 900 # Cache Time-To-Live in seconds (15 minutes)
+
     def _call_wikipedia_api(self, params: dict):
         try:
             response = requests.get(WIKIPEDIA_API_URL, params=params)
@@ -15,15 +20,25 @@ class WikipediaClient:
             raise HTTPException(status_code=503, detail=f"Error connecting to Wikipedia API: {e}")
 
     def search_articles(self, term: str):
+        cache_key = f"search_{term}"
+        if cache_key in self.cache and (time.time() - self.cache[cache_key]["timestamp"] < self.cache_ttl):
+            return self.cache[cache_key]["data"]
+
         params = {
             "action": "query",
             "list": "search",
             "srsearch": term,
             "format": "json"
         }
-        return self._call_wikipedia_api(params)
+        data = self._call_wikipedia_api(params)
+        self.cache[cache_key] = {"data": data, "timestamp": time.time()}
+        return data
 
     def get_article_summary(self, title: str) -> str:
+        cache_key = f"summary_{title}"
+        if cache_key in self.cache and (time.time() - self.cache[cache_key]["timestamp"] < self.cache_ttl):
+            return self.cache[cache_key]["data"]
+
         params = {
             "action": "query",
             "prop": "extracts",
@@ -36,8 +51,11 @@ class WikipediaClient:
         data = self._call_wikipedia_api(params)
         try:
             page = next(iter(data["query"]["pages"].values()))
-            return page.get("extract", "")
+            summary = page.get("extract", "")
+            self.cache[cache_key] = {"data": summary, "timestamp": time.time()}
+            return summary
         except (KeyError, StopIteration):
+            self.cache[cache_key] = {"data": "", "timestamp": time.time()} # Cache empty summary too
             return ""
 
     def get_article_content(self, title: str):

@@ -5,7 +5,7 @@ class GraphAnalyzer:
     def __init__(self, strategy: GraphAnalysisStrategy):
         self._strategy = strategy
 
-    async def analyze_and_add_results(self, nodes: list, edges: list) -> list:
+    def analyze_and_add_results(self, nodes: list, edges: list) -> list:
         G = nx.DiGraph()
 
         for node_data in nodes:

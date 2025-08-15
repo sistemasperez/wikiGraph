@@ -25,7 +25,7 @@ def search_wikipedia(term: str, wiki_client: WikipediaClient = Depends(get_wikip
     return wiki_client.search_articles(term)
 
 @router.get("/api/explore/{article_title}")
-async def explore_article(
+def explore_article(
     article_title: str,
     depth: int = 1,
     wiki_client: WikipediaClient = Depends(get_wikipedia_client),
@@ -57,6 +57,6 @@ async def explore_article(
             edges.append({"from": final_article_title, "to": neighbor_title})
 
     # 4. Calculate centrality using NetworkX in a separate function
-    nodes = await graph_analyzer.analyze_and_add_results(nodes, edges)
+    nodes = graph_analyzer.analyze_and_add_results(nodes, edges)
 
     return {"nodes": nodes, "edges": edges}

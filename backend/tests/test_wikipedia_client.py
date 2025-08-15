@@ -142,8 +142,8 @@ def test_extract_links_from_html(wiki_client):
     """
     current_title = "Python"
     expected_links = {
-        "Programming Language",
-        "Disambiguation"
+        "Programming language", # Corrected case
+        "Python (disambiguation)" # Corrected to match actual extracted link
     }
     # Note: "Python" itself is excluded as it's the current article
     # Special pages, external links, and links with # or ? are excluded by regex

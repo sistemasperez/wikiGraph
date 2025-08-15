@@ -46,8 +46,7 @@ def test_degree_centrality_strategy_analyze(sample_graph_data):
 
 # --- Tests for GraphAnalyzer ---
 
-@pytest.mark.asyncio
-async def test_graph_analyzer_analyze_and_add_results(sample_graph_data):
+def test_graph_analyzer_analyze_and_add_results(sample_graph_data):
     """
     Test GraphAnalyzer's analyze_and_add_results method with a concrete strategy.
     """
@@ -57,7 +56,7 @@ async def test_graph_analyzer_analyze_and_add_results(sample_graph_data):
     analyzer = GraphAnalyzer(strategy=DegreeCentralityStrategy())
 
     # Call the async method
-    modified_nodes = await analyzer.analyze_and_add_results(nodes_data, edges_data)
+    modified_nodes = analyzer.analyze_and_add_results(nodes_data, edges_data)
 
     # Verify that degree_centrality was added to each node
     assert all('degree_centrality' in node for node in modified_nodes)
@@ -73,8 +72,7 @@ async def test_graph_analyzer_analyze_and_add_results(sample_graph_data):
     assert pytest.approx(node_c['degree_centrality']) == 1.0
     assert pytest.approx(node_d['degree_centrality']) == 0.3333333333333333
 
-@pytest.mark.asyncio
-async def test_graph_analyzer_with_mock_strategy(sample_graph_data):
+def test_graph_analyzer_with_mock_strategy(sample_graph_data):
     """
     Test GraphAnalyzer's delegation to a mocked strategy.
     """
@@ -87,7 +85,7 @@ async def test_graph_analyzer_with_mock_strategy(sample_graph_data):
     }
 
     analyzer = GraphAnalyzer(strategy=mock_strategy)
-    modified_nodes = await analyzer.analyze_and_add_results(nodes_data, edges_data)
+    modified_nodes = analyzer.analyze_and_add_results(nodes_data, edges_data)
 
     # Verify that the strategy's analyze method was called
     mock_strategy.analyze.assert_called_once()
