@@ -1,75 +1,111 @@
-# WikiGraph
+# CrecerLab
 
-Este es un proyecto para CrecerLab que permite explorar artículos de Wikipedia y visualizar sus conexiones como un grafo.
+This is a full-stack application for exploring and visualizing knowledge graphs.
 
-## Arquitectura
+## Setup
 
-El proyecto está dividido en dos componentes principales:
+### Backend
 
-- **Backend**: Una API construida con FastAPI (Python) que se encarga de interactuar con la API de Wikipedia, procesar los datos y gestionar la persistencia en una base de datos de grafos Neo4j.
-- **Frontend**: Una aplicación de una sola página (SPA) construida con React y TypeScript que consume la API del backend para visualizar los grafos de manera interactiva.
-
----
-
-## Backend
-
-El backend está construido con FastAPI y proporciona endpoints para buscar artículos y explorar sus relaciones.
-
-### Configuración del Entorno
-
-**IMPORTANTE**: Este proyecto requiere una base de datos Neo4j. 
-
-1.  Crea una cuenta en [Neo4j AuraDB](https://neo4j.com/cloud/platform/aura-database/) o instala una instancia local.
-2.  En el directorio `backend`, renombra el archivo `.env.example` a `.env`.
-3.  Abre el archivo `.env` y completa las siguientes variables con tus credenciales de Neo4j:
-
+1.  Navigate to the `backend` directory:
+    ```bash
+    cd backend
     ```
-    NEO4J_URI="neo4j+s://xxxxxxxx.databases.neo4j.io"
-    NEO4J_USERNAME="neo4j"
-    NEO4J_PASSWORD="TUSUPERPASSWORD"
-    NEO4J_DATABASE="neo4j" # O el nombre de tu base de datos
+2.  Create a virtual environment and activate it:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
     ```
-
-### Instalación
-
-1.  Navega al directorio `backend`.
-2.  Instala las dependencias de Python:
+3.  Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
+4.  Run the application:
+    ```bash
+    uvicorn main:app --reload
+    ```
 
-### Ejecución
+### Frontend
 
-Para iniciar el servidor de desarrollo, ejecuta desde el directorio `backend`:
-
-```bash
-uvicorn main:app --reload
-```
-El servidor estará disponible en `http://127.0.0.1:8000`.
-
-### Endpoints de la API
-
-Para una descripción detallada de los endpoints, consulta el archivo `backend/specs.md`.
-
----
-
-## Frontend
-
-El frontend es una aplicación React que utiliza Vite como herramienta de construcción.
-
-### Instalación
-
-1.  Navega al directorio `frontend`.
-2.  Instala las dependencias de Node.js:
+1.  Navigate to the `frontend` directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
     ```bash
     npm install
     ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-### Ejecución
+## Project Structure
 
-Para iniciar el servidor de desarrollo, ejecuta desde el directorio `frontend`:
+-   `backend/`: FastAPI application for API endpoints, business logic, and database interactions.
+-   `frontend/`: React application for the user interface.
+-   `docs/`: Project documentation and related files.
 
-```bash
-npm run dev
-```
-La aplicación estará disponible en `http://localhost:5173` (o el puerto que indique Vite).
+## Features
+
+-   **Knowledge Graph Exploration**: Explore concepts and their relationships.
+-   **Wikipedia Integration**: Fetch and integrate information from Wikipedia.
+-   **Interactive Visualization**: Visualize graphs using React Flow.
+
+## Technologies Used
+
+### Backend
+
+-   Python
+-   FastAPI
+-   Neo4j (Graph Database)
+
+
+### Frontend
+
+-   React
+-   TypeScript
+-   Vite
+-   React Flow
+
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/YourFeature`).
+3.  Make your changes.
+4.  Commit your changes (`git commit -m 'Add some feature'`).
+5.  Push to the branch (`git push origin feature/YourFeature`).
+6.  Open a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
+
+## Decisiones de Arquitectura y Diseño
+
+Aquí se detallan las decisiones clave de arquitectura y diseño tomadas para este proyecto.
+
+<details>
+<summary>Esquema de la Base de Datos</summary>
+
+Elegimos **[la Base de Datos Neo4j]** como nuestra base de datos principal por las siguientes razones:
+
+*   **Naturaleza de los datos**: La información que manejamos, como de relaciones entre conceptos, entidades y sus conexiones, se adapta naturalmente a un modelo de grafos.
+*   **[Rendimiento]**: Para las operaciones clave como Centralidad, búsqueda de caminos, consultas complejas entre nodos y edges, esta base de datos ofrece un rendimiento superior e integración con la libreria de NetworkX debido a su optimización para traversales de grafos.
+*   **Escalabilidad/Flexibilidad**: Su flexibilidad nos permite añadir nuevos tipos de nodos y relaciones sin migraciones complejas.
+
+</details>
+
+<details>
+<summary>Desafíos en el Modelado del Grafo</summary>
+
+El modelado del grafo presentó varios desafíos interesantes, entre ellos:
+*   **Integración con Patrones de Diseño**:
+    *   **Patrón Repositorio**: La implementación de `Neo4jRepository` centraliza toda la lógica de interacción con la base de datos Neo4j. Esto desacopla la lógica de negocio del acceso a datos, facilitando el mantenimiento, las pruebas y la posible migración a otra base de datos en el futuro.
+    *   **Gestión de Transacciones**: Las operaciones de escritura en la base de datos (ej. `save_exploration`) se envuelven en transacciones (`session.write_transaction`). Esto asegura la atomicidad de las operaciones, garantizando que todas las partes de una exploración (nodo principal, nodos de grafo, relaciones) se guarden o ninguna se guarde, manteniendo la consistencia de los datos.
+    *   **Modelos Pydantic**: Se utilizan para definir la estructura de los datos (`GraphNode`, `GraphEdge`, `ExplorationCreate`, `ExplorationResponse`). Esto proporciona validación de datos automática, serialización/deserialización y una clara definición de la API, lo que mejora la robustez y la facilidad de uso del backend.
+    *   **UUIDs para Identificadores**: El uso de `uuid4` para generar `exploration_id` asegura identificadores únicos globalmente, lo cual es crucial en sistemas distribuidos y para evitar colisiones.
+
+</details>
