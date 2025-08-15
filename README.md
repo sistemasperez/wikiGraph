@@ -90,10 +90,10 @@ Aquí se detallan las decisiones clave de arquitectura y diseño tomadas para es
 <details>
 <summary>Esquema de la Base de Datos</summary>
 
-Elegimos **[la Base de Datos Neo4j]** como nuestra base de datos principal por las siguientes razones:
+Elegimos **la Base de Datos Neo4j** como nuestra base de datos principal por las siguientes razones:
 
 *   **Naturaleza de los datos**: La información que manejamos, como de relaciones entre conceptos, entidades y sus conexiones, se adapta naturalmente a un modelo de grafos.
-*   **[Rendimiento]**: Para las operaciones clave como Centralidad, búsqueda de caminos, consultas complejas entre nodos y edges, esta base de datos ofrece un rendimiento superior e integración con la libreria de NetworkX debido a su optimización para traversales de grafos.
+*   **Rendimiento**: Para las operaciones clave como Centralidad, búsqueda de caminos, consultas complejas entre nodos y edges, esta base de datos ofrece un rendimiento superior e integración con la libreria de NetworkX debido a su optimización para traversales de grafos.
 *   **Escalabilidad/Flexibilidad**: Su flexibilidad nos permite añadir nuevos tipos de nodos y relaciones sin migraciones complejas.
 
 </details>
